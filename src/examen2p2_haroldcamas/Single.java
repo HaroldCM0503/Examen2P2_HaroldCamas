@@ -6,7 +6,7 @@ public class Single extends Lanzamiento{
     Cancion cancion;
 
     public Single(Cancion cancion, String titulo, Date lanzamiento, int likes) {
-        super(titulo, lanzamiento, likes);
+        super(titulo, lanzamiento);
         this.cancion = cancion;
     }
 

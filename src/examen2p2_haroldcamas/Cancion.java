@@ -5,10 +5,9 @@ public class Cancion {
     double duracion;
     Lanzamiento referencia;
 
-    public Cancion(String titulo, double duracion, Lanzamiento referencia) {
+    public Cancion(String titulo, double duracion) {
         this.titulo = titulo;
         this.duracion = duracion;
-        this.referencia = referencia;
     }
 
     public String getTitulo() {
@@ -37,6 +36,6 @@ public class Cancion {
 
     @Override
     public String toString() {
-        return titulo;
+        return titulo + "[" + duracion + "]";
     }
 }

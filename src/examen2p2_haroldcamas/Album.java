@@ -8,7 +8,7 @@ public class Album extends Lanzamiento{
     int n_canciones;
 
     public Album(int n_canciones, String titulo, Date lanzamiento, int likes) {
-        super(titulo, lanzamiento, likes);
+        super(titulo, lanzamiento);
         this.n_canciones = n_canciones;
     }
 

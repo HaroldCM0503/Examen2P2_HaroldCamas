@@ -7,10 +7,10 @@ public class Lanzamiento {
     Date lanzamiento;
     int likes;
 
-    public Lanzamiento(String titulo, Date lanzamiento, int likes) {
+    public Lanzamiento(String titulo, Date lanzamiento) {
         this.titulo = titulo;
         this.lanzamiento = lanzamiento;
-        this.likes = likes;
+        this.likes = 0;
     }
 
     public String getTitulo() {
