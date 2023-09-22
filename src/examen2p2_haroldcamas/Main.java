@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package examen2p2_haroldcamas;
 
-/**
- *
- * @author harol
- */
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 public class Main extends javax.swing.JFrame {
 
     /**
@@ -26,21 +21,242 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        FR_Artistas = new javax.swing.JFrame();
+        FR_Clientes = new javax.swing.JFrame();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        tf_username = new javax.swing.JTextField();
+        tf_contraseña = new javax.swing.JTextField();
+        cb_tipoUser = new javax.swing.JComboBox<>();
+        bt_signIn = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        sp_edad = new javax.swing.JSpinner();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        tf_logUser = new javax.swing.JTextField();
+        tf_logPassword = new javax.swing.JTextField();
+        bt_iniciarSesion = new javax.swing.JButton();
+
+        javax.swing.GroupLayout FR_ArtistasLayout = new javax.swing.GroupLayout(FR_Artistas.getContentPane());
+        FR_Artistas.getContentPane().setLayout(FR_ArtistasLayout);
+        FR_ArtistasLayout.setHorizontalGroup(
+            FR_ArtistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 749, Short.MAX_VALUE)
+        );
+        FR_ArtistasLayout.setVerticalGroup(
+            FR_ArtistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 450, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout FR_ClientesLayout = new javax.swing.GroupLayout(FR_Clientes.getContentPane());
+        FR_Clientes.getContentPane().setLayout(FR_ClientesLayout);
+        FR_ClientesLayout.setHorizontalGroup(
+            FR_ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 750, Short.MAX_VALUE)
+        );
+        FR_ClientesLayout.setVerticalGroup(
+            FR_ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 450, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Username");
+
+        jLabel2.setText("Contraseña");
+
+        jLabel3.setText("Tipo");
+
+        cb_tipoUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Artista", "Cliente" }));
+
+        bt_signIn.setText("Sign In");
+        bt_signIn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_signInMouseClicked(evt);
+            }
+        });
+
+        jLabel6.setText("Edad");
+
+        sp_edad.setModel(new javax.swing.SpinnerNumberModel(12, 12, null, 1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6))
+                        .addGap(73, 73, 73)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cb_tipoUser, 0, 120, Short.MAX_VALUE)
+                            .addComponent(tf_username)
+                            .addComponent(tf_contraseña)
+                            .addComponent(sp_edad)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addComponent(bt_signIn, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(142, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(tf_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(tf_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(sp_edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cb_tipoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(bt_signIn, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
+        );
+
+        jTabbedPane1.addTab("Agregar Usuario", jPanel1);
+
+        jLabel4.setText("Username");
+
+        jLabel5.setText("Contraseña");
+
+        bt_iniciarSesion.setText("Log In");
+        bt_iniciarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_iniciarSesionMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(66, 66, 66)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tf_logUser, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                            .addComponent(tf_logPassword)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(172, 172, 172)
+                        .addComponent(bt_iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(124, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tf_logUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(tf_logPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
+                .addComponent(bt_iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(87, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Ingresar Sesion", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bt_signInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_signInMouseClicked
+        if(tf_username.getText().equals("") || tf_contraseña.getText().equals("") || cb_tipoUser.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(this, "Tiene que ingresar todos los datos");
+        }
+        else{
+            String user = tf_username.getText();
+            String pass = tf_contraseña.getText();
+            
+            if(cb_tipoUser.getSelectedItem().equals("Artista")){
+                if((int) sp_edad.getModel().getValue() < 18){
+                    JOptionPane.showMessageDialog(this, "La edad no puede ser menor a 18!");
+                }
+                else{
+                    Artista ar = new Artista(JOptionPane.showInputDialog("Ingrese el nombre de artista:"), user, pass, (int) sp_edad.getModel().getValue());
+                    artistas.add(ar);
+                    JOptionPane.showMessageDialog(this, "Artista añadido exitosamente!");
+                }
+            }
+            
+            else{
+                Cliente cl = new Cliente(user, pass, (int) sp_edad.getModel().getValue());
+                clientes.add(cl);
+                JOptionPane.showMessageDialog(this, "Cliente añadido exitosamente!");
+            }
+            
+            tf_contraseña.setText("");
+            tf_username.setText("");
+            sp_edad.getModel().setValue(12);
+        }
+    }//GEN-LAST:event_bt_signInMouseClicked
+
+    private void bt_iniciarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_iniciarSesionMouseClicked
+        String user = tf_logUser.getText();
+        String pass = tf_logPassword.getText();
+        
+        boolean isArtist = false;
+        boolean isClient = false;
+        
+        for (Artista artista : artistas) {
+            if(user.equals(artista.getUsername()) && pass.equals(artista.getContraseña())){
+                isArtist = true;
+            }
+        }
+        
+        for (Cliente cliente : clientes) {
+            if(user.equals(cliente.getUsername()) && pass.equals(cliente.getContraseña())){
+                isClient = true;
+            }
+        }
+        
+        if(isArtist){
+            
+        }
+        else if(isClient){
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Los datos ingresados no son validos!");
+        }
+    }//GEN-LAST:event_bt_iniciarSesionMouseClicked
 
     /**
      * @param args the command line arguments
@@ -76,7 +292,28 @@ public class Main extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    static ArrayList<Artista> artistas = new ArrayList();
+    static ArrayList<Cliente> clientes = new ArrayList();
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFrame FR_Artistas;
+    private javax.swing.JFrame FR_Clientes;
+    private javax.swing.JButton bt_iniciarSesion;
+    private javax.swing.JButton bt_signIn;
+    private javax.swing.JComboBox<String> cb_tipoUser;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JSpinner sp_edad;
+    private javax.swing.JTextField tf_contraseña;
+    private javax.swing.JTextField tf_logPassword;
+    private javax.swing.JTextField tf_logUser;
+    private javax.swing.JTextField tf_username;
     // End of variables declaration//GEN-END:variables
 }
