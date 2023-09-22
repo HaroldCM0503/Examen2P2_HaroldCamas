@@ -1,5 +1,11 @@
 package examen2p2_haroldcamas;
 
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -10,6 +16,47 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        File ar = new File("./Artistas.hc");
+        File cl = new File("./Clientes.hc");
+
+        FileInputStream fs;
+        ObjectInputStream os;
+
+        try {
+            fs = new FileInputStream(ar);
+            os = new ObjectInputStream(fs);
+            Artista temp;
+
+            try {
+                while ((temp = (Artista) os.readObject()) != null) {
+                    artistas.add(temp);
+                }
+            } catch (EOFException e) {
+            }
+
+            fs.close();
+            os.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            fs = new FileInputStream(cl);
+            os = new ObjectInputStream(fs);
+            Cliente temp;
+
+            try {
+                while ((temp = (Cliente) os.readObject()) != null) {
+                    clientes.add(temp);
+                }
+            } catch (EOFException e) {
+            }
+
+            fs.close();
+            os.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -198,30 +245,60 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_signInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_signInMouseClicked
-        if(tf_username.getText().equals("") || tf_contraseña.getText().equals("") || cb_tipoUser.getSelectedIndex() == -1){
+        if (tf_username.getText().equals("") || tf_contraseña.getText().equals("") || cb_tipoUser.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, "Tiene que ingresar todos los datos");
-        }
-        else{
+        } else {
             String user = tf_username.getText();
             String pass = tf_contraseña.getText();
-            
-            if(cb_tipoUser.getSelectedItem().equals("Artista")){
-                if((int) sp_edad.getModel().getValue() < 18){
+
+            if (cb_tipoUser.getSelectedItem().equals("Artista")) {
+                if ((int) sp_edad.getModel().getValue() < 18) {
                     JOptionPane.showMessageDialog(this, "La edad no puede ser menor a 18!");
-                }
-                else{
+                } else {
                     Artista ar = new Artista(JOptionPane.showInputDialog("Ingrese el nombre de artista:"), user, pass, (int) sp_edad.getModel().getValue());
                     artistas.add(ar);
+
+                    File file = new File("./Artistas.hc");
+                    FileOutputStream fs;
+                    ObjectOutputStream os;
+
+                    try {
+                        fs = new FileOutputStream(file);
+                        os = new ObjectOutputStream(fs);
+                        for (Artista artista : artistas) {
+                            os.writeObject(artista);
+                        }
+
+                        fs.close();
+                        os.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     JOptionPane.showMessageDialog(this, "Artista añadido exitosamente!");
                 }
-            }
-            
-            else{
+            } else {
                 Cliente cl = new Cliente(user, pass, (int) sp_edad.getModel().getValue());
                 clientes.add(cl);
+
+                File file = new File("./Clientes.hc");
+                FileOutputStream fs;
+                ObjectOutputStream os;
+
+                try {
+                    fs = new FileOutputStream(file);
+                    os = new ObjectOutputStream(fs);
+                    for (Cliente cliente : clientes) {
+                        os.writeObject(cliente);
+                    }
+
+                    fs.close();
+                    os.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 JOptionPane.showMessageDialog(this, "Cliente añadido exitosamente!");
             }
-            
+
             tf_contraseña.setText("");
             tf_username.setText("");
             sp_edad.getModel().setValue(12);
@@ -231,29 +308,27 @@ public class Main extends javax.swing.JFrame {
     private void bt_iniciarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_iniciarSesionMouseClicked
         String user = tf_logUser.getText();
         String pass = tf_logPassword.getText();
-        
+
         boolean isArtist = false;
         boolean isClient = false;
-        
+
         for (Artista artista : artistas) {
-            if(user.equals(artista.getUsername()) && pass.equals(artista.getContraseña())){
+            if (user.equals(artista.getUsername()) && pass.equals(artista.getContraseña())) {
                 isArtist = true;
             }
         }
-        
+
         for (Cliente cliente : clientes) {
-            if(user.equals(cliente.getUsername()) && pass.equals(cliente.getContraseña())){
+            if (user.equals(cliente.getUsername()) && pass.equals(cliente.getContraseña())) {
                 isClient = true;
             }
         }
-        
-        if(isArtist){
-            
-        }
-        else if(isClient){
-            
-        }
-        else{
+
+        if (isArtist) {
+
+        } else if (isClient) {
+
+        } else {
             JOptionPane.showMessageDialog(this, "Los datos ingresados no son validos!");
         }
     }//GEN-LAST:event_bt_iniciarSesionMouseClicked
@@ -292,7 +367,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
     }
-    
+
     static ArrayList<Artista> artistas = new ArrayList();
     static ArrayList<Cliente> clientes = new ArrayList();
     // Variables declaration - do not modify//GEN-BEGIN:variables

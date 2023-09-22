@@ -1,6 +1,8 @@
 package examen2p2_haroldcamas;
 
-public abstract class Usuario {
+import java.io.Serializable;
+
+public abstract class Usuario implements Serializable{
     String username;
     String contraseña;
     int edad;
