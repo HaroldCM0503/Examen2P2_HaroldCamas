@@ -6,6 +6,7 @@ public class Artista extends Usuario{
     String nombeArtistico;
     ArrayList<Cancion> canciones = new ArrayList();
     ArrayList<Album> albumes = new ArrayList();
+    ArrayList<Single> singles = new ArrayList();
 
     public Artista(String nombeArtistico, String username, String contraseña, int edad) {
         super(username, contraseña, edad);
@@ -50,4 +51,14 @@ public class Artista extends Usuario{
             return false;
         }
     }
+
+    public ArrayList<Single> getSingles() {
+        return singles;
+    }
+
+    public void setSingles(ArrayList<Single> singles) {
+        this.singles = singles;
+    }
+    
+    
 }
