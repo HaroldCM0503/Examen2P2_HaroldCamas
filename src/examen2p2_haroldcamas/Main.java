@@ -6,7 +6,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class Main extends javax.swing.JFrame {
@@ -268,6 +271,7 @@ public class Main extends javax.swing.JFrame {
                         for (Artista artista : artistas) {
                             os.writeObject(artista);
                         }
+                        os.flush();
 
                         fs.close();
                         os.close();
@@ -275,6 +279,23 @@ public class Main extends javax.swing.JFrame {
                         e.printStackTrace();
                     }
                     JOptionPane.showMessageDialog(this, "Artista añadido exitosamente!");
+
+                    File bit = new File("./Bitacora.txt");
+                    FileWriter fw;
+                    BufferedWriter bw;
+                    try {
+                        fw = new FileWriter(bit, true);
+                        bw = new BufferedWriter(fw);
+
+                        Date fecha = new Date();
+                        bw.write(ar + ": " + fecha);
+                        bw.flush();
+                        
+                        fw.close();
+                        bw.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             } else {
                 Cliente cl = new Cliente(user, pass, (int) sp_edad.getModel().getValue());
@@ -290,9 +311,27 @@ public class Main extends javax.swing.JFrame {
                     for (Cliente cliente : clientes) {
                         os.writeObject(cliente);
                     }
+                    os.flush();
 
                     fs.close();
                     os.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                File bit = new File("./Bitacora.txt");
+                FileWriter fw;
+                BufferedWriter bw;
+                try {
+                    fw = new FileWriter(bit, true);
+                    bw = new BufferedWriter(fw);
+
+                    Date fecha = new Date();
+                    bw.write(cl + ": " + fecha);
+                    bw.flush();
+                    
+                    fw.close();
+                    bw.close();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
