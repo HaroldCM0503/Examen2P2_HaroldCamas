@@ -1,5 +1,6 @@
 package examen2p2_haroldcamas;
 
+import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,10 +9,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Scanner;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -67,6 +70,8 @@ public class Main extends javax.swing.JFrame {
 
         System.out.println(clientes);
         System.out.println(artistas);
+        canciones.add(canc);
+        canciones.add(canc2);
     }
 
     /**
@@ -128,6 +133,13 @@ public class Main extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
+        pg_bar = new javax.swing.JProgressBar();
+        bt_reproducir = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jl_queue = new javax.swing.JList<>();
+        jLabel23 = new javax.swing.JLabel();
+        cb_elegirReproduccion = new javax.swing.JComboBox<>();
+        bt_refrescarEleccion = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -523,15 +535,66 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane6.addTab("Biblioteca", jPanel12);
 
+        bt_reproducir.setText("Reproducir Cancion/es");
+        bt_reproducir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_reproducirMouseClicked(evt);
+            }
+        });
+
+        jl_queue.setModel(new DefaultListModel());
+        jScrollPane6.setViewportView(jl_queue);
+
+        jLabel23.setText("Lista de Reproduccion:");
+
+        bt_refrescarEleccion.setText("Refrescar");
+        bt_refrescarEleccion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_refrescarEleccionMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 755, Short.MAX_VALUE)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(213, 213, 213)
+                        .addComponent(pg_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(290, 290, 290)
+                        .addComponent(bt_reproducir)))
+                .addContainerGap(242, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cb_elegirReproduccion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bt_refrescarEleccion, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(114, 114, 114))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 419, Short.MAX_VALUE)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(pg_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(bt_reproducir)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel23)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(cb_elegirReproduccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(bt_refrescarEleccion)))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         jTabbedPane6.addTab("Simulacion", jPanel13);
@@ -1038,10 +1101,56 @@ public class Main extends javax.swing.JFrame {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            
+
             ((Cliente) seleccionado).getCreadas().add(lista);
         }
     }//GEN-LAST:event_bt_crearListaMouseClicked
+
+    private void bt_refrescarEleccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_refrescarEleccionMouseClicked
+        DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_elegirReproduccion.getModel();
+
+        for (Cancion cancion : canciones) {
+            modelo.addElement(cancion);
+        }
+        for (Lista_Reproduccion lista : listas) {
+            modelo.addElement(lista);
+        }
+        for (Album album : albumes) {
+            modelo.addElement(album);
+        }
+        for (Single single : singles) {
+            modelo.addElement(single);
+        }
+
+        cb_elegirReproduccion.setModel(modelo);
+    }//GEN-LAST:event_bt_refrescarEleccionMouseClicked
+
+    private void bt_reproducirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_reproducirMouseClicked
+        if (cb_elegirReproduccion.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(this, "Elija algo que reproducir primero!");
+        } else {
+            DefaultListModel modelo = (DefaultListModel) jl_queue.getModel();
+            Object elegido = cb_elegirReproduccion.getSelectedItem();
+            modelo.removeAllElements();
+            if (elegido instanceof Lista_Reproduccion) {
+                for (Cancion cancion : ((Lista_Reproduccion) elegido).getCanciones()) {
+                    modelo.addElement(cancion);
+                }
+            } else if (elegido instanceof Album) {
+                for (Cancion cancion : ((Album) elegido).getCanciones()) {
+                    modelo.addElement(cancion);
+                }
+            } else if (elegido instanceof Single) {
+                modelo.addElement(((Single) elegido).getCancion());
+            } else {
+                modelo.addElement((Cancion) elegido);
+            }
+            pg_bar.setValue(0);
+            Cancion c = (Cancion) modelo.get(0);
+            Hilo h = new Hilo(pg_bar, canc);
+            h.start();
+        }
+    }//GEN-LAST:event_bt_reproducirMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1085,6 +1194,8 @@ public class Main extends javax.swing.JFrame {
     static ArrayList<Album> albumes = new ArrayList();
     static ArrayList<Single> singles = new ArrayList();
     static ArrayList<Lista_Reproduccion> listas = new ArrayList();
+    static Cancion canc = new Cancion("Prueba Hilo", 1.0);
+    static Cancion canc2 = new Cancion("Prueba Hilo2", 3.0);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFrame FR_Artistas;
     private javax.swing.JFrame FR_Clientes;
@@ -1099,11 +1210,14 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bt_pasar;
     private javax.swing.JButton bt_pasarCanciones;
     private javax.swing.JButton bt_refrescarCB;
+    private javax.swing.JButton bt_refrescarEleccion;
     private javax.swing.JButton bt_refrescarJList;
     private javax.swing.JButton bt_refrescarLanzamientos;
     private javax.swing.JButton bt_refrescarListaCanciones;
+    private javax.swing.JButton bt_reproducir;
     private javax.swing.JButton bt_signIn;
     private javax.swing.JComboBox<String> cb_cancionSingle;
+    private javax.swing.JComboBox<String> cb_elegirReproduccion;
     private javax.swing.JComboBox<String> cb_tipoUser;
     private com.toedter.calendar.JDateChooser dc_fechaLanzamiento;
     private com.toedter.calendar.JDateChooser dc_fechaSingle;
@@ -1122,6 +1236,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1147,6 +1262,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
@@ -1157,6 +1273,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JList<String> jl_CancionesT;
     private javax.swing.JList<String> jl_listaAlbum;
     private javax.swing.JList<String> jl_listaTotal;
+    private javax.swing.JList<String> jl_queue;
+    private javax.swing.JProgressBar pg_bar;
     private javax.swing.JSpinner sp_duracion;
     private javax.swing.JSpinner sp_duracion1;
     private javax.swing.JSpinner sp_duracion2;
