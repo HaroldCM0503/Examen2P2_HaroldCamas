@@ -1,8 +1,9 @@
 package examen2p2_haroldcamas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Lista_Reproduccion {
+public class Lista_Reproduccion implements Serializable{
     String nombre;
     int likes;
     ArrayList<Cancion> canciones = new ArrayList();
