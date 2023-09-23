@@ -1,6 +1,8 @@
 package examen2p2_haroldcamas;
 
-public class Cancion {
+import java.io.Serializable;
+
+public class Cancion implements Serializable{
     String titulo;
     double duracion;
     Lanzamiento referencia;

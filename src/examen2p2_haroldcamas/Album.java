@@ -1,9 +1,12 @@
 package examen2p2_haroldcamas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Album extends Lanzamiento{
+public class Album extends Lanzamiento implements Serializable{
+    private static final long serialVersionUID = 333L;
+    
     ArrayList<Cancion> canciones = new ArrayList();
     int n_canciones;
 

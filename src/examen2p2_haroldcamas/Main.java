@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -98,6 +99,7 @@ public class Main extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         bt_crearAlbum = new javax.swing.JButton();
         bt_pasar = new javax.swing.JButton();
+        bt_refrescarJList = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -106,6 +108,7 @@ public class Main extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         cb_cancionSingle = new javax.swing.JComboBox<>();
         bt_crearSingle = new javax.swing.JButton();
+        bt_refrescarCB = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tr_arbolLanzamientos = new javax.swing.JTree();
@@ -208,10 +211,21 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        bt_refrescarJList.setText("Refrescar");
+        bt_refrescarJList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_refrescarJListMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bt_crearAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(258, 258, 258))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,19 +237,18 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(tf_tituloLanzamiento))
                 .addGap(84, 84, 84)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addGap(27, 27, 27)
-                .addComponent(bt_pasar)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(bt_refrescarJList)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addGap(27, 27, 27)
+                        .addComponent(bt_pasar)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addContainerGap(135, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bt_crearAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(258, 258, 258))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,7 +270,9 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addComponent(bt_pasar)))
-                .addGap(61, 61, 61)
+                .addGap(18, 18, 18)
+                .addComponent(bt_refrescarJList)
+                .addGap(20, 20, 20)
                 .addComponent(bt_crearAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(118, Short.MAX_VALUE))
         );
@@ -277,6 +292,13 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        bt_refrescarCB.setText("Refrescar");
+        bt_refrescarCB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_refrescarCBMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -288,12 +310,15 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel19)
                     .addComponent(jLabel21))
                 .addGap(33, 33, 33)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(dc_fechaSingle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tf_tituloSingle)
-                    .addComponent(cb_cancionSingle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(175, 175, 175)
-                .addComponent(bt_crearSingle, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bt_refrescarCB)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dc_fechaSingle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tf_tituloSingle)
+                            .addComponent(cb_cancionSingle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(175, 175, 175)
+                        .addComponent(bt_crearSingle, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(219, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -317,7 +342,9 @@ public class Main extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel21)
                             .addComponent(cb_cancionSingle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(bt_refrescarCB)
+                .addContainerGap(242, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Publicar Single", jPanel5);
@@ -781,16 +808,43 @@ public class Main extends javax.swing.JFrame {
 
     private void bt_refrescarLanzamientosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_refrescarLanzamientosMouseClicked
         DefaultTreeModel modelo = (DefaultTreeModel) tr_arbolLanzamientos.getModel();
+        ((DefaultMutableTreeNode) ((DefaultMutableTreeNode) modelo.getRoot()).getChildAt(0)).removeAllChildren();
+        ((DefaultMutableTreeNode) ((DefaultMutableTreeNode) modelo.getRoot()).getChildAt(1)).removeAllChildren();
+        
         for (Album album : ((Artista) seleccionado).getAlbumes()) {
-            ((DefaultMutableTreeNode) ((DefaultMutableTreeNode) modelo.getRoot()).getChildAt(0)).add(new DefaultMutableTreeNode(album));
+            DefaultMutableTreeNode referencia = ((DefaultMutableTreeNode) ((DefaultMutableTreeNode) modelo.getRoot()).getChildAt(0));
+            DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(album);
+            for (Cancion cancion : album.getCanciones()) {
+                nodo.add(new DefaultMutableTreeNode(cancion));
+            }
+            referencia.add(nodo);
         }
         
         for (Single single : ((Artista) seleccionado).getSingles()) {
-            ((DefaultMutableTreeNode) ((DefaultMutableTreeNode) modelo.getRoot()).getChildAt(0)).add(new DefaultMutableTreeNode(single));
+            DefaultMutableTreeNode referencia = ((DefaultMutableTreeNode) ((DefaultMutableTreeNode) modelo.getRoot()).getChildAt(1));
+            referencia.add(new DefaultMutableTreeNode(single));
         }
         
         tr_arbolLanzamientos.setModel(modelo);
     }//GEN-LAST:event_bt_refrescarLanzamientosMouseClicked
+
+    private void bt_refrescarJListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_refrescarJListMouseClicked
+        DefaultListModel modelo = (DefaultListModel) jl_listaTotal.getModel();
+        modelo.removeAllElements();
+        for (Cancion cancion : ((Artista) seleccionado).getCanciones()) {
+            modelo.addElement(cancion);
+        }
+        jl_listaTotal.setModel(modelo);
+    }//GEN-LAST:event_bt_refrescarJListMouseClicked
+
+    private void bt_refrescarCBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_refrescarCBMouseClicked
+        DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_cancionSingle.getModel();
+        modelo.removeAllElements();
+        for (Cancion cancion : ((Artista) seleccionado).getCanciones()) {
+            modelo.addElement(cancion);
+        }
+        cb_cancionSingle.setModel(modelo);
+    }//GEN-LAST:event_bt_refrescarCBMouseClicked
 
     /**
      * @param args the command line arguments
@@ -845,6 +899,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bt_crearSingle;
     private javax.swing.JButton bt_iniciarSesion;
     private javax.swing.JButton bt_pasar;
+    private javax.swing.JButton bt_refrescarCB;
+    private javax.swing.JButton bt_refrescarJList;
     private javax.swing.JButton bt_refrescarLanzamientos;
     private javax.swing.JButton bt_signIn;
     private javax.swing.JComboBox<String> cb_cancionSingle;

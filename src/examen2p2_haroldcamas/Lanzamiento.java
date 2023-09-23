@@ -1,8 +1,10 @@
 package examen2p2_haroldcamas;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Lanzamiento {
+public class Lanzamiento implements Serializable{
+    private static final long serialVersionUID = 333L;
     String titulo;
     Date lanzamiento;
     int likes;
